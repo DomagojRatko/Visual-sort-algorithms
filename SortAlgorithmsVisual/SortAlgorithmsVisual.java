@@ -8,11 +8,13 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     /** Change values of arr for different output.
      *  Change drawSpeed for faster or slower drawing speed.
      *  Change rect Width and Height
+     *  Change realSort to true to disable visual break down of every action and display real bubble sorting
      */
-    private static final int[] arr ={10,16,5,8,19,4,17,11,21,9,20,12,7,13,14,2,18,3,15,1,6};
-    private final double drawSpeed = 10;
-    private final int rectWidth = 40;
-    private final int rectHeight = 40;
+    private static final int[] arr ={45, 88, 69, 31, 35, 19, 58, 100, 67, 47, 12, 2, 3, 81, 98, 39, 49, 50, 56, 87, 89, 59, 82, 21, 28, 17, 66, 70, 20, 13, 36, 68, 71, 10, 62, 25, 37, 1, 92, 91, 96, 64, 4, 65, 33, 7, 74, 97, 53, 99, 30, 6, 48, 9, 83, 43, 94, 86, 22, 93, 18, 42, 29, 95, 54, 76, 90, 16, 84, 79, 8, 24, 61, 63, 38, 77, 34, 72, 44, 14, 27, 52, 75, 51, 55, 26, 23, 57, 40, 85, 78, 46, 5, 11, 15, 41, 80, 60, 73, 32};
+    private final double drawSpeed = 20;
+    private final boolean realSort = false;
+    private final int rectWidth = 10;
+    private final int rectHeight = 10;
 
     // rect array
     private final ArrRect[] arrRect = new ArrRect[arr.length];
@@ -55,10 +57,12 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
                 temp = arr[j-1];
                 arr[j-1] = arr[j];
                 arr[j] = temp;
-                break;
+                if(!realSort){
+                    break;
+                }
             }
         }
-        // it stops run when array is sorted
+        // it stops run when array is done sorting
         if(temp == 0){
             end();
         }
@@ -82,7 +86,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
         }
     }
 
-    // thread run
+    // Thread run
     public void run(){
         long lastTime = System.nanoTime();
         double ns = 1000000000 / drawSpeed;
