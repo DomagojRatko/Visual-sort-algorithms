@@ -18,7 +18,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
             59, 82, 21, 28, 17, 66, 70, 20, 13, 36, 68, 71, 10, 62, 25, 37, 1, 92, 91, 96, 64, 4, 65, 33, 7, 74, 97, 53,
             99, 30, 6, 48, 9, 83, 43, 94, 86, 22, 93, 18, 42, 29, 95, 54, 76, 90, 16, 84, 79, 8, 24, 61, 63, 38, 77, 34,
             72, 44, 14, 27, 52, 75, 51, 55, 26, 23, 57, 40, 85, 78, 46, 5, 11, 15, 41, 80, 60, 73, 32};
-    private final double drawSpeed = 20;
+    private final double drawSpeed = 10;
     private final boolean realSort = true;
     private final int rectWidth = 10;
     private final int rectHeight = 10;
@@ -30,9 +30,9 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     private final int screenWidth = arr.length * rectWidth;
     private final int screenHeight = maxScreenHeight(arr) * rectHeight;
 
-    // counter
     private int arrayOrder = 0;
-    private boolean run = true;
+    private boolean run;
+    private static String titleText = "";
 
     // constructor
     public SortAlgorithmsVisual() {
@@ -40,6 +40,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
         createArrRect();
         Thread thread = new Thread(this);
         thread.start();
+        run = true;
     }
 
     // run program
@@ -69,6 +70,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
                 }
             }
         }
+        // it stops run when array is done sorting
         if(isSorted()){
             end();
         }
@@ -108,8 +110,15 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
             for (int i = 0; i < arrayOrder; i++) {
                 ArrRect object = arrRect[i];
                 object.draw(g);
+                drawText(g, titleText);
             }
         }
+    }
+
+    // draw text
+    private void drawText(Graphics g, String titleText) {
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        g.drawString(titleText,20,20);
     }
 
     // Thread run
@@ -137,9 +146,11 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
             switch(sortingAlgorithm){
                 case 0:
                     bubbleSort();
+                    titleText = "Bubble sort";
                     break;
                 case 1:
                     selectionSort();
+                    titleText = "Selection sort";
                     break;
             }
             createArrRect();
