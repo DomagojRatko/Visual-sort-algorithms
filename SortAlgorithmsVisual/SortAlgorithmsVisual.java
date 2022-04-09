@@ -33,6 +33,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
 
     // constructor
     public SortAlgorithmsVisual() {
+        beforeSortLog();
         createArrRect();
         Thread thread = new Thread(this);
         thread.start();
@@ -158,7 +159,6 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     // stop after array is sorted
     private void end(){
         run = false;
-        beforeSortLog();
         afterSortLog();
         System.out.println("\nArrays sum: " + arraySumValue());
     }
