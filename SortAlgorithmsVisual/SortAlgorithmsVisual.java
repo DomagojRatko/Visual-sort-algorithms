@@ -57,7 +57,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
                 break;
             }
         }
-        // it stops run when array is dose sorting
+        // it stops run when array is sorted
         if(temp == 0){
             end();
         }
@@ -81,7 +81,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
         }
     }
 
-    // Thread run
+    // thread run
     public void run(){
         long lastTime = System.nanoTime();
         double ns = 1000000000 / drawSpeed;
