@@ -10,9 +10,12 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
      *  Change rect Width and Height
      *  Change realSort to true to disable visual break down of every action and display real bubble sorting
      */
+    // SELECT SORTING ALGORITHM
+    private final int sortingAlgorithm = 1; // 0 = bubble, 1 = selection
+
     private static final int[] arr ={45, 88, 69, 31, 35, 19, 58, 100, 67, 47, 12, 2, 3, 81, 98, 39, 49, 50, 56, 87, 89, 59, 82, 21, 28, 17, 66, 70, 20, 13, 36, 68, 71, 10, 62, 25, 37, 1, 92, 91, 96, 64, 4, 65, 33, 7, 74, 97, 53, 99, 30, 6, 48, 9, 83, 43, 94, 86, 22, 93, 18, 42, 29, 95, 54, 76, 90, 16, 84, 79, 8, 24, 61, 63, 38, 77, 34, 72, 44, 14, 27, 52, 75, 51, 55, 26, 23, 57, 40, 85, 78, 46, 5, 11, 15, 41, 80, 60, 73, 32};
     private final double drawSpeed = 20;
-    private final boolean realSort = false;
+    private final boolean realSort = true;
     private final int rectWidth = 10;
     private final int rectHeight = 10;
 
@@ -68,6 +71,22 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
         }
     }
 
+    // selection sorting algorithm
+    private void selectionSort() {
+        int n = arr.length;
+        for (int i = 0; i < n-1; i++) {
+            int min_idx = i;
+            for (int j = i+1; j < n; j++)
+                if (arr[j] < arr[min_idx]) {
+                    min_idx = j;
+                    break;
+                }
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
     // screen prefer size scaled by arrays sized
     @Override
     public Dimension getPreferredSize() {
@@ -108,7 +127,14 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
         if(arrayOrder < arr.length){
             arrayOrder++;
         } else {
-            bubbleSort();
+            switch(sortingAlgorithm){
+                case 0:
+                    bubbleSort();
+                    break;
+                case 1:
+                    selectionSort();
+                    break;
+            }
             createArrRect();
         }
     }
@@ -124,7 +150,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     }
 
     // arrays max value for calculating screen height
-    public static int maxScreenHeight(int[] t) {
+    private static int maxScreenHeight(int[] t) {
         int maximum = t[0];
         for (int i=1; i<t.length; i++) {
             if (t[i] > maximum) {
