@@ -68,7 +68,6 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
                 }
             }
         }
-        // it stops run when array is done sorting
         if(isSorted()){
             end();
         }
