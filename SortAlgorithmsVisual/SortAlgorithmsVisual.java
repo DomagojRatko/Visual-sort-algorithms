@@ -11,9 +11,12 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
      *  Change realSort to true to disable visual break down of every action and display real bubble sorting
      */
     // SELECT SORTING ALGORITHM
-    private final int sortingAlgorithm = 1; // 0 = bubble, 1 = selection
+    private final int sortingAlgorithm = 0; // 0 = bubble, 1 = selection
 
-    private static final int[] arr ={45, 88, 69, 31, 35, 19, 58, 100, 67, 47, 12, 2, 3, 81, 98, 39, 49, 50, 56, 87, 89, 59, 82, 21, 28, 17, 66, 70, 20, 13, 36, 68, 71, 10, 62, 25, 37, 1, 92, 91, 96, 64, 4, 65, 33, 7, 74, 97, 53, 99, 30, 6, 48, 9, 83, 43, 94, 86, 22, 93, 18, 42, 29, 95, 54, 76, 90, 16, 84, 79, 8, 24, 61, 63, 38, 77, 34, 72, 44, 14, 27, 52, 75, 51, 55, 26, 23, 57, 40, 85, 78, 46, 5, 11, 15, 41, 80, 60, 73, 32};
+    private static final int[] arr = {45, 88, 69, 31, 35, 19, 58, 100, 67, 47, 12, 2, 3, 81, 98, 39, 49, 50, 56, 87, 89,
+            59, 82, 21, 28, 17, 66, 70, 20, 13, 36, 68, 71, 10, 62, 25, 37, 1, 92, 91, 96, 64, 4, 65, 33, 7, 74, 97, 53,
+            99, 30, 6, 48, 9, 83, 43, 94, 86, 22, 93, 18, 42, 29, 95, 54, 76, 90, 16, 84, 79, 8, 24, 61, 63, 38, 77, 34,
+            72, 44, 14, 27, 52, 75, 51, 55, 26, 23, 57, 40, 85, 78, 46, 5, 11, 15, 41, 80, 60, 73, 32};
     private final double drawSpeed = 20;
     private final boolean realSort = true;
     private final int rectWidth = 10;
@@ -30,18 +33,18 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     private int arrayOrder = 0;
     private boolean run = true;
 
-    // run program
-    public static void main(String[] args) {
-        SortAlgorithmsVisual sortAlgorithmsVisual = new SortAlgorithmsVisual();
-        sortAlgorithmsVisual.frame(); // create JFrame
-    }
-
     // constructor
     public SortAlgorithmsVisual() {
         beforeSortLog();
         createArrRect();
         Thread thread = new Thread(this);
         thread.start();
+    }
+
+    // run program
+    public static void main(String[] args) {
+        SortAlgorithmsVisual sortAlgorithmsVisual = new SortAlgorithmsVisual();
+        sortAlgorithmsVisual.frame(); // create JFrame
     }
 
     // create unsorted array of rect
@@ -66,7 +69,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
             }
         }
         // it stops run when array is done sorting
-        if(temp == 0){
+        if(isSorted()){
             end();
         }
     }
@@ -76,14 +79,18 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
         int n = arr.length;
         for (int i = 0; i < n-1; i++) {
             int min_idx = i;
-            for (int j = i+1; j < n; j++)
+            for (int j = i+1; j < n; j++) {
                 if (arr[j] < arr[min_idx]) {
                     min_idx = j;
                     break;
                 }
+            }
             int temp = arr[min_idx];
             arr[min_idx] = arr[i];
             arr[i] = temp;
+        }
+        if(isSorted()){
+            end();
         }
     }
 
@@ -171,7 +178,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
 
     // unsorted array console log
     private void beforeSortLog() {
-        System.out.println("Array Before Bubble Sort");
+        System.out.println("Array Before Sort");
         for (int value : arr) {
             System.out.print(value + " ");
         }
@@ -180,10 +187,23 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
 
     // sorted array console log
     private void afterSortLog() {
-        System.out.println("Array After Bubble Sort");
+        System.out.println("Array After Sort");
         for (int value : arr) {
             System.out.print(value + " ");
         }
+    }
+
+    // check if array sorted
+    private static boolean isSorted() {
+        if (arr.length <= 1) {
+            return true;
+        }
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     // stop after array is sorted
