@@ -10,6 +10,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
      *  Change rect Width and Height
      *  Change realSort to true to disable visual break down of every action and display real bubble sorting
      */
+    // todo: Add more sorting algorithms.
     // SELECT SORTING ALGORITHM
     private final int sortingAlgorithm = 0; // 0 = bubble, 1 = selection
 
