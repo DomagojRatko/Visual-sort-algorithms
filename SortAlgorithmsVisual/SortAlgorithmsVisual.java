@@ -12,7 +12,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
      */
     // todo: Add more sorting algorithms.
     // SELECT SORTING ALGORITHM
-    private final int sortingAlgorithm = 0; // 0 = bubble, 1 = selection, 2 = insertion
+    private final int sortingAlgorithm = 3; // 0 = bubble, 1 = selection, 2 = insertion, 3 = cocktail
 
     // set of 200 numbers
     private static final int[] arr = {195, 45, 10, 116, 168, 37, 198, 65, 143, 174, 9, 96, 177, 193, 176, 118, 17, 14,
@@ -27,7 +27,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     // set of 20 numbers
 //  private static final int[] arr = {18, 9, 7, 20, 15, 6, 13, 3, 19, 4, 17, 8, 5, 1, 2, 16, 12, 14, 11, 10};
 
-    private double drawSpeed = 50;
+    private final double drawSpeed = 25;
     private final int rectWidth = 5;
     private final int rectHeight = 5;
 
@@ -39,6 +39,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     private final int screenHeight = maxScreenHeight(arr) * rectHeight;
 
     private int arrayOrder = 0;
+    private int loop = 0;
     private boolean run;
     private static String titleText = "";
 
@@ -83,18 +84,16 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     // selection sorting algorithm
     private void selectionSort() {
         int n = arr.length;
-        for (int i = 0; i < n-1; i++) {
-            int min_idx = i;
-            for (int j = i+1; j < n; j++) {
-                if (arr[j] < arr[min_idx]) {
-                    min_idx = j;
-                    break;
-                }
+        int min_idx = loop;
+        for (int j = loop+1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
             }
-            int temp = arr[min_idx];
-            arr[min_idx] = arr[i];
-            arr[i] = temp;
         }
+        int temp = arr[min_idx];
+        arr[min_idx] = arr[loop];
+        arr[loop] = temp;
+        loop++;
         if(isSorted()){
             end();
         }
@@ -102,20 +101,39 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
 
     // insertion sorting algorithm
     private void insertionSort() {
-        int n = arr.length;
-        for (int i = 1; i < n; ++i) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
-                break;
-            }
-            arr[j + 1] = key;
+        int key = arr[loop];
+        int j = loop - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
         }
+        arr[j + 1] = key;
+        loop++;
         if(isSorted()){
             end();
         }
+    }
+
+    // cocktail sorting algorithm
+    private void cocktailSort() {
+        int end = arr.length;
+        for (int i = loop; i < end - 1; ++i)
+        {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+        end = end - 1;
+        for (int i = end - 1; i >= loop; i--) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+        }
+        loop = loop + 1;
     }
 
     // screen prefer size scaled by arrays sized
@@ -180,6 +198,10 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
                 case 2:
                     insertionSort();
                     titleText = "insertion";
+                    break;
+                case 3:
+                    cocktailSort();
+                    titleText = "cocktail";
                     break;
             }
             createArrRect();
