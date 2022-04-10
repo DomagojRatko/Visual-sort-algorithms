@@ -14,19 +14,19 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     // SELECT SORTING ALGORITHM
     private final int sortingAlgorithm = 0; // 0 = bubble, 1 = selection, 2 = insertion
 
-    // set of 200 numbers 
-    private static final int[] arr = {195, 45, 10, 116, 168, 37, 198, 65, 143, 174, 9, 96, 177, 193, 176, 118, 17, 14, 
-            156, 86, 171, 21, 149, 32, 98, 39, 121, 5, 53, 186, 189, 46, 6, 142, 66, 28, 128, 41, 188, 44, 15, 152, 24, 
-            27, 122, 105, 61, 154, 49, 167, 166, 12, 148, 48, 127, 58, 153, 40, 31, 172, 69, 35, 88, 173, 182, 2, 54, 
-            139, 179, 99, 103, 131, 161, 183, 87, 175, 59, 50, 18, 157, 162, 117, 110, 159, 197, 94, 123, 89, 126, 70, 
-            71, 181, 43, 138, 196, 11, 26, 47, 60, 132, 114, 184, 136, 120, 77, 178, 78, 23, 91, 113, 72, 192, 33, 150, 
-            151, 158, 3, 97, 75, 190, 101, 19, 16, 62, 185, 147, 22, 200, 73, 124, 38, 82, 51, 34, 180, 160, 67, 20, 191, 
-            95, 170, 85, 30, 80, 84, 4, 115, 130, 29, 155, 169, 164, 90, 55, 163, 108, 36, 64, 107, 74, 63, 42, 106, 134, 
-            104, 92, 79, 135, 8, 145, 109, 146, 13, 119, 93, 81, 68, 7, 112, 144, 57, 52, 137, 83, 1, 125, 100, 76, 111, 
+    // set of 200 numbers
+    private static final int[] arr = {195, 45, 10, 116, 168, 37, 198, 65, 143, 174, 9, 96, 177, 193, 176, 118, 17, 14,
+            156, 86, 171, 21, 149, 32, 98, 39, 121, 5, 53, 186, 189, 46, 6, 142, 66, 28, 128, 41, 188, 44, 15, 152, 24,
+            27, 122, 105, 61, 154, 49, 167, 166, 12, 148, 48, 127, 58, 153, 40, 31, 172, 69, 35, 88, 173, 182, 2, 54,
+            139, 179, 99, 103, 131, 161, 183, 87, 175, 59, 50, 18, 157, 162, 117, 110, 159, 197, 94, 123, 89, 126, 70,
+            71, 181, 43, 138, 196, 11, 26, 47, 60, 132, 114, 184, 136, 120, 77, 178, 78, 23, 91, 113, 72, 192, 33, 150,
+            151, 158, 3, 97, 75, 190, 101, 19, 16, 62, 185, 147, 22, 200, 73, 124, 38, 82, 51, 34, 180, 160, 67, 20, 191,
+            95, 170, 85, 30, 80, 84, 4, 115, 130, 29, 155, 169, 164, 90, 55, 163, 108, 36, 64, 107, 74, 63, 42, 106, 134,
+            104, 92, 79, 135, 8, 145, 109, 146, 13, 119, 93, 81, 68, 7, 112, 144, 57, 52, 137, 83, 1, 125, 100, 76, 111,
             129, 187, 141, 102, 56, 140, 165, 25, 199, 194, 133};
     // set of 20 numbers
 //  private static final int[] arr = {18, 9, 7, 20, 15, 6, 13, 3, 19, 4, 17, 8, 5, 1, 2, 16, 12, 14, 11, 10};
-    
+
     private double drawSpeed = 50;
     private final int rectWidth = 5;
     private final int rectHeight = 5;
@@ -139,8 +139,11 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
 
     // draw text
     private void drawText(Graphics g, String titleText) {
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        g.drawString(titleText,20,20);
+        g.setFont(new Font("TimesRoman", Font.BOLD, 15));
+        g.setColor(Color.GRAY);
+        g.drawString("Sort: " + titleText,20,20);
+        g.drawString("Draw speed: "  + drawSpeed ,20,35);
+        g.drawString("Rect size: W:"  + rectWidth + ", H:" + rectHeight,20,50);
     }
 
     // Thread run
@@ -168,15 +171,15 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
             switch(sortingAlgorithm){
                 case 0:
                     bubbleSort();
-                    titleText = "Bubble sort";
+                    titleText = "bubble";
                     break;
                 case 1:
                     selectionSort();
-                    titleText = "Selection sort";
+                    titleText = "selection";
                     break;
                 case 2:
                     insertionSort();
-                    titleText = "Insertion sort";
+                    titleText = "insertion";
                     break;
             }
             createArrRect();
