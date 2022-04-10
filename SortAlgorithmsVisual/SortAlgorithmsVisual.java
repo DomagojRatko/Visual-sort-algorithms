@@ -8,8 +8,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     // run program
     public static void main(String[] args) {
         SortAlgorithmsVisual sortAlgorithmsVisual = new SortAlgorithmsVisual();
-        sortAlgorithmsVisual.frame(); // create JFrame
-    }
+        sortAlgorithmsVisual.frame();
 
     /** Change values of arr for different output.
      *  Change drawSpeed for faster or slower drawing speed.
@@ -48,7 +47,7 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     private int arrayOrder = 0;
     private int loop = 0;
     private boolean run;
-    private static String titleText = "";
+    private String titleText = "";
 
     // constructor
     public SortAlgorithmsVisual() {
