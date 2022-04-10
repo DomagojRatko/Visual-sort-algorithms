@@ -8,7 +8,6 @@ public class SortAlgorithmsVisual extends JPanel implements Runnable {
     /** Change values of arr for different output.
      *  Change drawSpeed for faster or slower drawing speed.
      *  Change rect Width and Height
-     *  Change realSort to true to disable visual break down of every action and display real bubble sorting
      */
     // todo: Add more sorting algorithms.
     // SELECT SORTING ALGORITHM
