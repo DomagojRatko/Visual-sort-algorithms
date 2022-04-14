@@ -39,7 +39,7 @@ public class SortPanel extends JPanel implements Runnable {
     // select sorting algorithm
     private final AlgorithmsList algorithmsList = AlgorithmsList.BUBBLE;
 
-    // draw settings
+    // select array size with RandomIntSet.SET_
     public static final int[] arr = RandomIntSet.SET_50;
 
     /**
@@ -60,6 +60,8 @@ public class SortPanel extends JPanel implements Runnable {
 
     // rect array
     public final DrawRect[] drawRect = new DrawRect[arr.length];
+    
+    // runnable boolean 
     private boolean run;
 
     // algorithms
